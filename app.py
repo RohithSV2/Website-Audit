@@ -5,7 +5,7 @@ import json
 import queue
 import threading
 from typing import Dict, Any
-from flask import Flask, render_template, request, jsonify, Response, send_file, make_response
+from flask import Flask, render_template, request, jsonify, Response, send_file, make_response, send_from_directory
 from flask_cors import CORS
 
 from auditor import WebsiteCrawler, AuditReporter, SiteAuditReport
@@ -15,8 +15,19 @@ from demo.mock_site import demo_bp
 # Initialize persistent SQLite audit store
 init_db()
 
-app = Flask(__name__, template_folder="templates", static_folder="static")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates"),
+    static_folder=os.path.join(BASE_DIR, "static"),
+    static_url_path="/static"
+)
 CORS(app)
+
+# Fallback static files handler for serverless environments
+@app.route("/static/<path:filename>")
+def serve_static_files(filename):
+    return send_from_directory(os.path.join(BASE_DIR, "static"), filename)
 
 # Register intentional sandbox target
 app.register_blueprint(demo_bp)
