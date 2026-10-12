@@ -1,47 +1,47 @@
 /* ==========================================================================
-   VECTRA WEBSITE AUDIT ENGINE — BESPOKE STYLESHEET
-   Unique Architectural Palette: Basalt Ink, Solar Persimmon, Lichen Acid & Ecru
+   VECTRA WEBSITE AUDIT ENGINE — GREEN & WHITE BESPOKE STYLESHEET
+   Architectural Palette: Forest Emerald, Crisp Porcelain White & Fresh Mint
    Fonts: Syne, Plus Jakarta Sans, JetBrains Mono
    ========================================================================== */
 
 :root {
-  /* Bespoke Unique Color Palette */
-  --bg-primary: #080D0B;
-  --bg-surface: #101614;
-  --bg-elevated: #16201C;
-  --bg-card-hover: #1B2722;
+  /* Bespoke Green & White Palette */
+  --bg-primary: #F7FAF8;            /* Crisp Porcelain White */
+  --bg-surface: #FFFFFF;            /* Pure Clean White */
+  --bg-elevated: #F0FDF4;           /* Soft Ice Mint White */
+  --bg-card-hover: #E7F9EF;         /* Light Mint Tint */
   
-  --border-subtle: rgba(226, 196, 158, 0.11);
-  --border-active: rgba(255, 94, 54, 0.45);
+  --border-subtle: rgba(16, 185, 129, 0.22);
+  --border-active: #059669;
   
-  --text-primary: #F5EFE8;
-  --text-secondary: #B6ABA0;
-  --text-muted: #7A7065;
+  --text-primary: #09261A;          /* Deep Forest Onyx */
+  --text-secondary: #244C38;        /* Botanical Slate */
+  --text-muted: #5D806E;            /* Sage Tone */
   
-  /* Primary Bespoke Accents */
-  --accent-flame: #FF5E36;          /* Solar Persimmon */
-  --accent-flame-hover: #FF7552;
-  --accent-flame-glow: rgba(255, 94, 54, 0.28);
+  /* Primary Green Accents */
+  --accent-flame: #059669;          /* Deep Botanical Emerald */
+  --accent-flame-hover: #047857;
+  --accent-flame-glow: rgba(5, 150, 105, 0.25);
   
-  --accent-lichen: #D2F834;         /* Lichen Acid / Solar Wasabi */
-  --accent-lichen-glow: rgba(210, 248, 52, 0.22);
+  --accent-lichen: #10B981;         /* Radiant Fresh Mint */
+  --accent-lichen-glow: rgba(16, 185, 129, 0.2);
   
   /* Severity Colors */
-  --sev-critical: #FF3B5C;          /* Crimson Guava */
-  --sev-critical-bg: rgba(255, 59, 92, 0.09);
-  --sev-critical-border: rgba(255, 59, 92, 0.35);
+  --sev-critical: #DC2626;          /* Crimson Rose */
+  --sev-critical-bg: #FEF2F2;
+  --sev-critical-border: #FCA5A5;
   
-  --sev-warning: #FFA826;           /* Solar Marigold */
-  --sev-warning-bg: rgba(255, 168, 38, 0.09);
-  --sev-warning-border: rgba(255, 168, 38, 0.35);
+  --sev-warning: #D97706;           /* Solar Amber */
+  --sev-warning-bg: #FFFBEB;
+  --sev-warning-border: #FCD34D;
   
-  --sev-notice: #2DD4BF;            /* Opal Lapis */
-  --sev-notice-bg: rgba(45, 212, 191, 0.09);
-  --sev-notice-border: rgba(45, 212, 191, 0.35);
+  --sev-notice: #0284C7;            /* Lapis Cyan */
+  --sev-notice-bg: #F0F9FF;
+  --sev-notice-border: #BAE6FD;
   
-  --sev-passed: #D2F834;            /* Lichen Acid */
-  --sev-passed-bg: rgba(210, 248, 52, 0.09);
-  --sev-passed-border: rgba(210, 248, 52, 0.35);
+  --sev-passed: #059669;            /* Pure Botanical Emerald */
+  --sev-passed-bg: #ECFDF5;
+  --sev-passed-border: #A7F3D0;
 
   /* Typography Stacks */
   --font-display: 'Syne', -apple-system, sans-serif;
@@ -53,7 +53,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 10px 30px -8px rgba(6, 78, 59, 0.08);
   --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -85,28 +85,28 @@ body {
   pointer-events: none;
   z-index: 0;
   filter: blur(120px);
-  opacity: 0.15;
+  opacity: 0.2;
 }
 
 .glow-top-left {
   top: -200px;
   left: -150px;
-  background: radial-gradient(circle, var(--accent-flame) 0%, transparent 70%);
+  background: radial-gradient(circle, #10B981 0%, transparent 70%);
 }
 
 .glow-bottom-right {
   bottom: -200px;
   right: -150px;
-  background: radial-gradient(circle, var(--accent-lichen) 0%, transparent 70%);
-  opacity: 0.12;
+  background: radial-gradient(circle, #059669 0%, transparent 70%);
+  opacity: 0.18;
 }
 
 .grid-overlay {
   position: fixed;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(226, 196, 158, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 196, 158, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
@@ -139,9 +139,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
-  background: rgba(16, 22, 20, 0.75);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px -4px rgba(6, 78, 59, 0.06);
   backdrop-filter: blur(12px);
 }
 
@@ -155,7 +156,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent-flame) 0%, #B93514 100%);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #fff;
   display: flex;
   align-items: center;
@@ -224,9 +225,9 @@ body {
 }
 
 .pill-btn {
-  background: rgba(255, 94, 54, 0.12);
-  border: 1px solid rgba(255, 94, 54, 0.35);
-  color: var(--accent-flame);
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #047857;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 600;
@@ -237,9 +238,9 @@ body {
 }
 
 .pill-btn:hover {
-  background: var(--accent-flame);
+  background: #059669;
   color: #fff;
-  box-shadow: 0 4px 16px var(--accent-flame-glow);
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.25);
   transform: translateY(-1px);
 }
 
@@ -249,9 +250,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 26px;
-  border: 1px solid rgba(226, 196, 158, 0.16);
-  background: radial-gradient(circle at 10% 20%, rgba(255, 94, 54, 0.05) 0%, transparent 60%),
-              linear-gradient(180deg, #131A17 0%, var(--bg-surface) 100%);
+  border: 1px solid var(--border-subtle);
+  background: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+              linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
 }
 
 .main-title {
@@ -299,8 +300,8 @@ body {
 
 .url-input-wrap input {
   width: 100%;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
+  background: #FFFFFF;
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-md);
   padding: 18px 20px 18px 48px;
   color: var(--text-primary);
@@ -311,12 +312,12 @@ body {
 }
 
 .url-input-wrap input:focus {
-  border-color: var(--accent-flame);
-  box-shadow: 0 0 0 3px var(--accent-flame-glow);
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
 }
 
 .cta-btn {
-  background: linear-gradient(135deg, var(--accent-flame) 0%, #D4441E 100%);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #fff;
   border: none;
   border-radius: var(--radius-md);
@@ -330,14 +331,14 @@ body {
   align-items: center;
   gap: 10px;
   transition: var(--transition);
-  box-shadow: 0 6px 20px var(--accent-flame-glow);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
   white-space: nowrap;
 }
 
 .cta-btn:hover {
-  background: linear-gradient(135deg, var(--accent-flame-hover) 0%, var(--accent-flame) 100%);
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(255, 94, 54, 0.45);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.45);
 }
 
 .cta-btn:active {
@@ -601,9 +602,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 36px;
-  background: radial-gradient(circle at 10% 50%, rgba(210, 248, 52, 0.04) 0%, transparent 60%),
-              linear-gradient(180deg, #141B18 0%, var(--bg-surface) 100%);
-  border: 1px solid rgba(226, 196, 158, 0.16);
+  background: radial-gradient(circle at 10% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
+              linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+  border: 1px solid var(--border-subtle);
 }
 
 .summary-left {
@@ -627,7 +628,7 @@ body {
 
 .score-dial-bg {
   fill: none;
-  stroke: rgba(226, 196, 158, 0.1);
+  stroke: rgba(16, 185, 129, 0.15);
   stroke-width: 12;
 }
 
@@ -995,14 +996,15 @@ body {
 }
 
 .issue-card:hover {
-  border-color: rgba(226, 196, 158, 0.25);
-  background: #131B18;
+  border-color: rgba(5, 150, 105, 0.4);
+  background: #F0FDF4;
+  transform: translateY(-1px);
 }
 
 .issue-card.critical { border-left: 4px solid var(--sev-critical); }
 .issue-card.warning { border-left: 4px solid var(--sev-warning); }
 .issue-card.notice { border-left: 4px solid var(--sev-notice); }
-.issue-card.passed { border-left: 4px solid var(--sev-passed); opacity: 0.85; }
+.issue-card.passed { border-left: 4px solid var(--sev-passed); opacity: 0.9; }
 
 .issue-header {
   display: flex;
@@ -1040,6 +1042,7 @@ body {
   background: var(--bg-elevated);
   padding: 2px 7px;
   border-radius: 4px;
+  border: 1px solid var(--border-subtle);
 }
 
 .issue-title {
@@ -1069,12 +1072,12 @@ body {
 }
 
 .issue-impact-box {
-  background: rgba(10, 15, 13, 0.6);
-  border: 1px solid rgba(226, 196, 158, 0.08);
+  background: #F0FDF4;
+  border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 13px;
-  color: #D3C8BE;
+  color: var(--text-secondary);
   display: flex;
   gap: 8px;
 }
@@ -1086,8 +1089,8 @@ body {
 }
 
 .issue-recipe-box {
-  background: #080D0B;
-  border: 1px solid rgba(255, 94, 54, 0.22);
+  background: #042114;
+  border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
   display: flex;
@@ -1105,16 +1108,16 @@ body {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  color: var(--accent-flame);
+  color: #34D399;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .copy-fix-btn {
-  background: rgba(255, 94, 54, 0.12);
-  border: 1px solid rgba(255, 94, 54, 0.3);
-  color: var(--accent-flame);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
   font-family: var(--font-mono);
   font-size: 11px;
   padding: 3px 8px;
@@ -1124,19 +1127,19 @@ body {
 }
 
 .copy-fix-btn:hover {
-  background: var(--accent-flame);
+  background: #059669;
   color: #fff;
 }
 
 .recipe-code {
-  background: #040605;
+  background: #02140C;
   padding: 10px 14px;
   border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-primary);
+  color: #6EE7B7;
   overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 /* Heading Tree Visualizer */
