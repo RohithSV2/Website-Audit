@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VECTRA // Comprehensive Website Auditing & SEO Diagnostics</title>
+  
+  <!-- Unique Google Fonts: Syne (Geometric sculptural display) + Plus Jakarta Sans (Crisp UI) + JetBrains Mono (Tech/Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+  <!-- Ambient Decorative Background -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-bottom-right"></div>
+  <div class="grid-overlay"></div>
+
+  <div class="app-container">
+    
+    <!-- Top Navigation / Brand Header -->
+    <header class="site-header">
+      <div class="brand-group">
+        <div class="brand-symbol">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">VECTRA <span class="brand-tag">PRO // 2.5</span></span>
+          <span class="brand-subtitle">Autonomous HTML Crawler & Systematic SEO Diagnostics</span>
+        </div>
+      </div>
+
+      <div class="header-status">
+        <span class="pulse-indicator"></span>
+        <button id="history-toggle-btn" class="pill-btn history-btn" title="View previously saved audits">
+          🕒 Audit History (<span id="history-count-badge">0</span>)
+        </button>
+        <button id="try-demo-btn" class="pill-btn demo-btn" title="Audit the built-in multi-page test sandbox with intentional SEO & structural flaws">
+          🧪 Load Flawed Demo Sandbox
+        </button>
+      </div>
+    </header>
+
+    <!-- Slide-out Audit History Drawer -->
+    <div id="history-backdrop" class="drawer-backdrop hidden"></div>
+    <aside id="history-drawer" class="history-drawer hidden">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h3>Local Audit History</h3>
+          <span class="drawer-subtitle">Persistent SQLite Storage</span>
+        </div>
+        <button id="close-history-btn" class="close-drawer-btn">&times;</button>
+      </div>
+      <div class="drawer-body" id="history-list-container">
+        <!-- Dynamically populated from SQLite -->
+      </div>
+    </aside>
+
+    <!-- Hero / Audit Configuration Launcher -->
+    <section class="launcher-section card-surface">
+      <div class="launcher-headline">
+        <h1 class="main-title">Engineering Structural & SEO Precision.</h1>
+        <p class="main-desc">
+          Crawls and parses HTML across pages to automatically flag missing meta tags, 
+          broken links, and heading-structure errors with systematic debugging recipes.
+        </p>
+      </div>
+
+      <form id="audit-form" class="audit-form">
+        <div class="input-row">
+          <div class="url-input-wrap">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="target-url" 
+              placeholder="Enter target URL (e.g., https://example.com or click Demo)" 
+              required
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+
+          <button type="submit" id="submit-btn" class="cta-btn">
+            <span class="btn-text">INITIALIZE AUDIT</span>
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- Crawler Configuration Controls -->
+        <div class="config-drawer">
+          <div class="config-item">
+            <label for="max-pages-select">Max Pages to Crawl:</label>
+            <select id="max-pages-select" class="custom-select">
+              <option value="1">1 Page (Quick Scan)</option>
+              <option value="5" selected>5 Pages (Standard)</option>
+              <option value="10">10 Pages (Deep Audit)</option>
+              <option value="25">25 Pages (Comprehensive)</option>
+            </select>
+          </div>
+
+          <div class="config-item">
+            <label for="max-depth-select">Crawl Depth:</label>
+            <select id="max-depth-select" class="custom-select">
+              <option value="1">Depth 1 (Direct Links)</option>
+              <option value="2" selected>Depth 2 (Two Hops)</option>
+              <option value="3">Depth 3 (Broad Crawl)</option>
+            </select>
+          </div>
+
+          <div class="config-item toggle-item">
+            <label class="switch-label">
+              <input type="checkbox" id="check-external-toggle" checked>
+              <span class="switch-slider"></span>
+              <span class="toggle-text">Check External Links (404 Detection)</span>
+            </label>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Real-Time Crawl Telemetry & Progress (Shown while running) -->
+    <section id="telemetry-panel" class="telemetry-panel card-surface hidden">
+      <div class="telemetry-header">
+        <div class="telemetry-title-group">
+          <div class="spinner-pulse"></div>
+          <div>
+            <h3 class="telemetry-title">Crawling & Systematically Parsing DOM</h3>
+            <span id="telemetry-target-url" class="telemetry-url">https://...</span>
+          </div>
+        </div>
+        <div class="telemetry-phase-badge" id="telemetry-phase">INITIALIZING</div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="telemetry-progress-fill" style="width: 5%;"></div>
+      </div>
+
+      <div class="telemetry-metrics-grid">
+        <div class="metric-card">
+          <span class="metric-label">Pages Crawled</span>
+          <span class="metric-value" id="stat-pages">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Queue Remaining</span>
+          <span class="metric-value" id="stat-queue">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Links Probed</span>
+          <span class="metric-value" id="stat-links">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Elapsed Time</span>
+          <span class="metric-value" id="stat-timer">0.0s</span>
+        </div>
+      </div>
+
+      <div class="live-terminal-feed">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-label">LIVE CRAWLER LOG STREAM</span>
+        </div>
+        <div class="terminal-logs" id="terminal-logs">
+          <div class="log-line system">[VECTRA ENGINE] Worker spawned. Connecting to stream...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Audit Report Dashboard (Shown upon completion) -->
+    <main id="results-panel" class="results-panel hidden">
+      
+      <!-- Executive Summary Card -->
+      <section class="card-surface summary-hero">
+        <div class="summary-left">
+          <div class="score-dial-wrap">
+            <svg class="score-dial-svg" viewBox="0 0 160 160">
+              <circle class="score-dial-bg" cx="80" cy="80" r="70"></circle>
+              <circle class="score-dial-val" id="score-circle" cx="80" cy="80" r="70" stroke-dasharray="440" stroke-dashoffset="440"></circle>
+            </svg>
+            <div class="score-text-overlay">
+              <span class="score-number" id="report-score">0</span>
+              <span class="score-max">/ 100</span>
+              <span class="score-grade-pill" id="report-grade">-</span>
+            </div>
+          </div>
+          
+          <div class="summary-meta">
+            <div class="badge-row">
+              <span class="hero-badge" id="report-pages-badge">0 Pages Crawled</span>
+              <span class="hero-badge" id="report-links-badge">0 Links Verified</span>
+              <span class="hero-badge" id="report-duration-badge">0.0s Duration</span>
+              <span class="hero-badge security-badge" id="report-sec-badge">Security Grade: -</span>
+            </div>
+            <h2 class="report-domain-title" id="report-domain">https://...</h2>
+            <p class="report-timestamp" id="report-timestamp">Generated on ...</p>
+          </div>
+        </div>
+
+        <div class="summary-right">
+          <div class="export-actions">
+            <button id="download-md-btn" class="action-btn md-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export Markdown
+            </button>
+            <button id="download-json-btn" class="action-btn json-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              Export JSON
+            </button>
+            <button id="print-report-btn" class="action-btn print-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              Print / Save PDF
+            </button>
+          </div>
+
+          <!-- Quick Severity Tally -->
+          <div class="severity-tally-grid">
+            <div class="tally-card critical" data-filter="critical">
+              <span class="tally-count" id="count-critical">0</span>
+              <span class="tally-title">🚨 Critical</span>
+            </div>
+            <div class="tally-card warning" data-filter="warning">
+              <span class="tally-count" id="count-warning">0</span>
+              <span class="tally-title">⚠️ Warnings</span>
+            </div>
+            <div class="tally-card notice" data-filter="notice">
+              <span class="tally-count" id="count-notice">0</span>
+              <span class="tally-title">💡 Notices</span>
+            </div>
+            <div class="tally-card passed" data-filter="passed">
+              <span class="tally-count" id="count-passed">0</span>
+              <span class="tally-title">✓ Passed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Sub-Scores Radar -->
+      <section class="card-surface category-scores-section">
+        <h3 class="section-title">Algorithmic Category Breakdown</h3>
+        <div class="category-bars-grid" id="category-bars-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="report-tabs">
+        <button class="tab-btn active" data-tab="tab-debugger">
+          <span class="tab-icon">⚡</span> Systematic Debugger (<span id="tab-issues-count">0</span>)
+        </button>
+        <button class="tab-btn" data-tab="tab-serp">
+          <span class="tab-icon">🔎</span> SERP & Social Previews
+        </button>
+        <button class="tab-btn" data-tab="tab-headings">
+          <span class="tab-icon">📑</span> Heading Hierarchy Tree
+        </button>
+        <button class="tab-btn" data-tab="tab-security">
+          <span class="tab-icon">🛡️</span> Security & SSL Grade
+        </button>
+        <button class="tab-btn" data-tab="tab-cwv">
+          <span class="tab-icon">📊</span> CWV & DOM Performance
+        </button>
+        <button class="tab-btn" data-tab="tab-links">
+          <span class="tab-icon">🔗</span> Broken Links & Anchors (<span id="tab-broken-count">0</span>)
+        </button>
+        <button class="tab-btn" data-tab="tab-pages">
+          <span class="tab-icon">📄</span> Crawled Pages (<span id="tab-pages-count">0</span>)
+        </button>
+      </nav>
+
+      <!-- TAB 1: SYSTEMATIC DEBUGGER -->
+      <section id="tab-debugger" class="tab-content active">
+        <!-- Filter Controls -->
+        <div class="filter-bar card-surface">
+          <div class="filter-group">
+            <span class="filter-label">Filter Severity:</span>
+            <button class="filter-pill active" data-sev="all">All</button>
+            <button class="filter-pill red-pill" data-sev="critical">Critical</button>
+            <button class="filter-pill yellow-pill" data-sev="warning">Warnings</button>
+            <button class="filter-pill blue-pill" data-sev="notice">Notices</button>
+            <button class="filter-pill green-pill" data-sev="passed">Passed</button>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Category:</span>
+            <select id="issue-category-select" class="custom-select sm">
+              <option value="all">All Categories</option>
+              <option value="meta">Meta & Head Tags</option>
+              <option value="headings">Heading Hierarchy</option>
+              <option value="links">Links & Dead Anchors</option>
+              <option value="images">Image Alt & Media</option>
+              <option value="structure">Semantics & DOM</option>
+              <option value="security">Security & HTTPS</option>
+              <option value="performance">Content & Latency</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Issue Cards Container -->
+        <div class="issues-list" id="issues-list-container">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- TAB 2: SERP & SOCIAL PREVIEWS SIMULATOR -->
+      <section id="tab-serp" class="tab-content">
+        <div class="card-surface preview-panel">
+          <div class="preview-header">
+            <div>
+              <h3 class="tree-title">Live Search & Social Card Simulator</h3>
+              <p class="tree-desc">
+                Simulates real-time rendering on Google Search (desktop & mobile) and social share cards (X/Twitter & OpenGraph). 
+                Instantly detects title truncation, missing thumbnails, or snippet cut-offs.
+              </p>
+            </div>
+            <div class="tree-page-picker">
+              <label for="serp-page-select">Select Page:</label>
+              <select id="serp-page-select" class="custom-select sm">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="previews-grid">
+            <!-- Google Desktop SERP Simulator -->
+            <div class="preview-box">
+              <div class="preview-box-title">
+                <span>Google Search Snippet (Desktop Simulation)</span>
+                <span class="preview-tag">SERP</span>
+              </div>
+              <div class="serp-card-mock">
+                <div class="serp-url-row">
+                  <div class="serp-favicon-placeholder"></div>
+                  <div class="serp-url-text" id="serp-mock-url">https://example.com</div>
+                </div>
+                <h4 class="serp-title-text" id="serp-mock-title">Page Title Here</h4>
+                <p class="serp-desc-text" id="serp-mock-desc">Page description snippet as it appears in Google organic search results.</p>
+                <div class="serp-badge-status" id="serp-mock-status"></div>
+              </div>
+            </div>
+
+            <!-- Twitter / X Card Simulator -->
+            <div class="preview-box">
+              <div class="preview-box-title">
+                <span>X / Twitter Share Card (Summary Large Image)</span>
+                <span class="preview-tag">Twitter Card</span>
+              </div>
+              <div class="social-card-mock" id="twitter-card-mock">
+                <div class="social-image-wrap" id="twitter-mock-image-wrap">
+                  <span class="social-image-placeholder">No og:image / twitter:image detected</span>
+                </div>
+                <div class="social-content-wrap">
+                  <span class="social-domain" id="twitter-mock-domain">example.com</span>
+                  <h4 class="social-title" id="twitter-mock-title">Shared Page Title</h4>
+                  <p class="social-desc" id="twitter-mock-desc">Description of the card shown on social timelines.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: HEADING HIERARCHY TREE -->
+      <section id="tab-headings" class="tab-content">
+        <div class="card-surface tree-container">
+          <div class="tree-header">
+            <div>
+              <h3 class="tree-title">Heading Structure & Skipped Level Visualizer</h3>
+              <p class="tree-desc">
+                Visualizes chronological heading nesting (H1 &rarr; H2 &rarr; H3). 
+                Skipped levels (e.g. jumping H1 to H3) and missing/multiple H1 tags are highlighted with diagnostic alerts.
+              </p>
+            </div>
+            <div class="tree-page-picker">
+              <label for="tree-page-select">Select Page:</label>
+              <select id="tree-page-select" class="custom-select sm">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="tree-display" id="heading-tree-display">
+            <!-- Visual hierarchy tree rendered here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: ENTERPRISE SECURITY & HEADERS -->
+      <section id="tab-security" class="tab-content">
+        <div class="card-surface security-panel">
+          <div class="security-hero-bar">
+            <div class="sec-score-group">
+              <div class="sec-grade-box" id="sec-overall-grade">-</div>
+              <div>
+                <h3 class="tree-title">Enterprise Transport & Header Security</h3>
+                <p class="tree-desc">Evaluates HTTP response headers protecting against clickjacking, XSS, and MIME-sniffing.</p>
+              </div>
+            </div>
+            <div class="sec-score-val" id="sec-overall-score">Score: 0/100</div>
+          </div>
+
+          <div class="headers-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Header Directive</th>
+                  <th>Status</th>
+                  <th>Current Value</th>
+                  <th>Recommended Standard</th>
+                </tr>
+              </thead>
+              <tbody id="security-headers-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: CORE WEB VITALS & DOM PERFORMANCE -->
+      <section id="tab-cwv" class="tab-content">
+        <div class="card-surface cwv-panel">
+          <div class="tree-header">
+            <div>
+              <h3 class="tree-title">DOM Complexity & Core Web Vitals (CWV) Telemetry</h3>
+              <p class="tree-desc">Monitors render-blocking assets, DOM depth, and Cumulative Layout Shift (CLS) risk factors.</p>
+            </div>
+          </div>
+
+          <div class="cwv-cards-grid" id="cwv-metrics-container">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: BROKEN LINKS & ANCHORS -->
+      <section id="tab-links" class="tab-content">
+        <div class="card-surface table-card">
+          <div class="table-card-header">
+            <div>
+              <h3 class="table-title">Hyperlink Health & Dead Anchor Diagnostics</h3>
+              <p class="table-desc">
+                Lists tested hyperlinks across crawled pages. Identifies broken HTTP status codes, 
+                DNS lookup failures, timeouts, and anchor fragments missing corresponding DOM target IDs.
+              </p>
+            </div>
+            <div class="table-filter-toggle">
+              <label class="switch-label sm">
+                <input type="checkbox" id="broken-only-toggle" checked>
+                <span class="switch-slider"></span>
+                <span class="toggle-text">Show Broken & Dead Links Only</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Target URL</th>
+                  <th>Anchor Text</th>
+                  <th>Type</th>
+                  <th>Source Page</th>
+                  <th>Latency</th>
+                </tr>
+              </thead>
+              <tbody id="links-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: CRAWLED PAGES INVENTORY -->
+      <section id="tab-pages" class="tab-content">
+        <div class="pages-grid" id="pages-grid-container">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-left">
+        <span class="footer-brand">VECTRA PRO AUDIT ENGINE</span> &mdash; Engineered for Automated SEO, Structural & Security Diagnostics.
+      </div>
+      <div class="footer-right">
+        <span>Python 3.12, BeautifulSoup4, HTTPX & SQLite Storage</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
